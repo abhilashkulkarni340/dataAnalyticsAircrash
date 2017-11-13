@@ -9,19 +9,20 @@ Created on Sun Nov 12 19:14:31 2017
 from tkinter import *
 from first import *
 import datetime
-class Application(Frame):
+
+
+class AnalysisNumber(Frame):
     
 
-    def __init__(self, master): #Function to initialize the Application
-        """ Initialize the frame. """
-        super(Application,self).__init__(master)
+    def __init__(self, master): #Function to initialize the window
+        #Initialize the frame
+        super(AnalysisNumber,self).__init__(master)
         self.grid()
-        self.create_widgets()
+        self.display_widgets()
         self.dataset=readData()
-        self.dataset=cleanData(self.dataset)
+        #self.dataset=cleanData(self.dataset)
         
-    def create_widgets(self):   #Function to create Widgets to take data
-        
+    def display_widgets(self):   #Function to create Widgets to take data
         """
         This section is for selecting columns to view the dataset
         """
@@ -32,7 +33,8 @@ class Application(Frame):
         Label(self,text="   ",width=25).grid(row=0,column=3,sticky=W)
         Label(self,text="   ",width=25).grid(row=0,column=4,sticky=W)
         Label(self,text="   ",width=25).grid(row=0,column=5,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=6,sticky=W)
+#        self.close=Button(self,text="Quit",command=self.closeWindow)
+#        self.close.grid(row=0,column=6,sticky=W)
         
         #Text boxes for take From and To date
         Label(self,text="From (YYYY-MM-DD) :*").grid(row=1,column=0,sticky=W)
@@ -114,7 +116,7 @@ class Application(Frame):
 
         #Button to submit data
         self.btn2=Button(self,text="SUBMIT STATISTICS",command=self.descStat)
-        self.btn2.grid(row=12,column=2,columnspan=2,sticky=W)
+        self.btn2.grid(row=12,column=1,columnspan=2,sticky=W)
         
     def displayCols(self):  #Function to display the columns
         #initialize variables
@@ -184,10 +186,12 @@ class Application(Frame):
             x[self.stat.get()].insert(0,desc[stat])
             x[self.stat.get()].config(state=DISABLED)
         
-        
+    def closeWindow(self):  #Function to close the window
+        self.master.quit()
+        self.master.destroy()
 
-root=Tk()
-root.title("Data analysis of Aircrash Dataset")
-root.geometry("2000x2000")
-app=Application(root)
-root.mainloop()
+#root=Tk()
+#root.title("Data analysis of Aircrash Dataset")
+#root.geometry("2000x2000")
+#app=Application(root)
+#root.mainloop()
