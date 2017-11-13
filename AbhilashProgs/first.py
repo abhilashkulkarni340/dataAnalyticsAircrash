@@ -42,9 +42,14 @@ def cleanData(dataset):
     shape=dataset.shape
     for x in range(shape[0]):
         dataset.iloc[x,0]=datetime.datetime.strptime(dataset.iloc[x,0], "%m/%d/%Y").date()
-        
+    
+    print("Dataset has been cleaned.")
     #returning dataset
     return dataset
+
+"""
+Selecting Columns Section
+"""
 
 #Function to return columns of the dataset
 def getColumns(dataset,col,rowStart,rowEnd):
@@ -55,6 +60,15 @@ def filterDs(dataset,frm,to):
     filter_1=dataset['Date']>frm
     filter_2=dataset['Date']>to
     return dataset[filter_1 & filter_2]
+
+"""
+Descriptive Statistics Section
+"""
+
+#Function to describe the columns
+def desColumns(dataset,col):
+    desc=dataset[col].describe()
+    return desc
 
 #Function for displaying data regarding the data set
 def defDataset(dataset):
@@ -76,10 +90,4 @@ def retData(dataset,cols,rows=0):   #cols will be a list of columns selected
 #ds=readData()
 #ds=cleanData(ds)
 ##print(ds.head(10))
-#frm=input("From: ")
-#to=input("To: ")
-#frm=datetime.datetime.strptime(frm, "%Y-%m-%d").date()
-#to=datetime.datetime.strptime(to, "%Y-%m-%d").date()
-#filter_1=ds['Date']>frm
-#filter_2=ds['Date']<to
-#print(ds[filter_1 & filter_2].head())
+#desColumns(ds,'Aboard')
