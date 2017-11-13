@@ -80,24 +80,27 @@ class Application(Frame):
         
         #Taking data from the entries
         if self.frm.get() and self.frm.get():
-            frm=datetime.datetime.strptime(str(self.frm.get()), "%Y-%m-%d").date()
-            to=datetime.datetime.strptime(str(self.to.get()), "%Y-%m-%d").date()
+            frm=datetime.datetime.strptime(self.frm.get(), "%Y-%m-%d").date()
+            to=datetime.datetime.strptime(self.to.get(), "%Y-%m-%d").date()
         rowStart=int(self.rowStart.get())
         rowEnd=int(self.rowEnd.get())
+        newds=self.dataset
+        newds=filterDs(newds,frm,to)
+        
         
         #Checking for selected checkboxes
         if self.operator.get():
-            msg['OPERATOR']=getColumns(self.dataset,'Operator',rowStart,rowEnd)
+            msg['OPERATOR']=getColumns(newds,'Operator',rowStart,rowEnd)
         if self.route.get():
-            msg['ROUTE']=getColumns(self.dataset,'Route',rowStart,rowEnd)
+            msg['ROUTE']=getColumns(newds,'Route',rowStart,rowEnd)
         if self.flight.get():
-            msg['FLIGHT NUMBER']=getColumns(self.dataset,'Flight #',rowStart,rowEnd)
+            msg['FLIGHT NUMBER']=getColumns(newds,'Flight #',rowStart,rowEnd)
         if self.regis.get():
-            msg['REGISTRATION']=getColumns(self.dataset,'Registration',rowStart,rowEnd)
+            msg['REGISTRATION']=getColumns(newds,'Registration',rowStart,rowEnd)
         if self.aboard.get():
-            msg['ABOARD']=getColumns(self.dataset,'Aboard',rowStart,rowEnd)
+            msg['ABOARD']=getColumns(newds,'Aboard',rowStart,rowEnd)
         if self.fatal.get():
-            msg['FATALITIES']=getColumns(self.dataset,'Fatalities',rowStart,rowEnd)
+            msg['FATALITIES']=getColumns(newds,'Fatalities',rowStart,rowEnd)
         
         #Displaying the columns in textareas
         for x in msg.keys():
