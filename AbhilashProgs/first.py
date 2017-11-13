@@ -14,11 +14,11 @@ import datetime
 #Function for Data ingestion stage using read_csv
 def readData():
     try:
-        return pd.read_csv('./Airplane_Crashes_and_Fatalities_Since_1908.csv') #storing the data in a DataFrame
+        dataset=pd.read_csv('./Airplane_Crashes_and_Fatalities_Since_1908.csv') #storing the data in a DataFrame
+        print("Dataset loaded successfully.")
+        return dataset
     except FileNotFoundError:
         print("The file does not exist.")
-    else:
-        print("Dataset loaded successfully")
     
     #print(crashds.head(2))
 
@@ -46,6 +46,10 @@ def cleanData(dataset):
     #returning dataset
     return dataset
 
+#Function to return columns of the dataset
+def getColumns(dataset,col,rowStart,rowEnd):
+    return dataset[col].iloc[rowStart:rowEnd].to_string(index=False)
+
 #Function for displaying data regarding the data set
 def defDataset(dataset):
     #print(dataset.head())
@@ -63,6 +67,6 @@ def retData(dataset,cols,rows=0):   #cols will be a list of columns selected
         print(dataset[x])
 
 
-ds=readData()
+#ds=readData()
 #ds=cleanData(ds)
 #print(ds.head(10))
