@@ -11,7 +11,6 @@ from first import *
 import datetime
 class Application(Frame):
     
-    """ GUI application """
 
     def __init__(self, master): #Function to initialize the Application
         """ Initialize the frame. """
@@ -154,6 +153,7 @@ class Application(Frame):
             Label(self,text=x).grid(row=r,column=col,sticky=W)
             self.t=Text(self,width=25,height=rowEnd-rowStart,wrap=WORD)
             self.t.grid(row=r+2,column=col,rowspan=2,sticky=W)
+            self.t.config(state=NORMAL)
             self.t.delete(0.0,END)
             self.t.insert(0.0,msg[x])
             self.t.config(state=DISABLED)
@@ -174,11 +174,15 @@ class Application(Frame):
         #displaying the result in the text boxes
         if self.stat.get()=='all':
             for i in x.keys():
+                x[i].config(state=NORMAL)
                 x[i].delete(0,END)
                 x[i].insert(0,desc[i])
+                x[i].config(state=DISABLED)
         else:
+            x[self.stat.get()].config(state=NORMAL)
             x[self.stat.get()].delete(0,END)
             x[self.stat.get()].insert(0,desc[stat])
+            x[self.stat.get()].config(state=DISABLED)
         
         
 

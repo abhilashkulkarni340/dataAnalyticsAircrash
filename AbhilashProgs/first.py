@@ -42,7 +42,8 @@ def cleanData(dataset):
     shape=dataset.shape
     for x in range(shape[0]):
         dataset.iloc[x,0]=datetime.datetime.strptime(dataset.iloc[x,0], "%m/%d/%Y").date()
-        
+    
+    print("Dataset has been cleaned.")
     #returning dataset
     return dataset
 
