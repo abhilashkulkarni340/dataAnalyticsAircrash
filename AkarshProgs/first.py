@@ -64,6 +64,10 @@ def filterDs(dataset,frm,to):
 """
 Descriptive Statistics Section
 """
+#Function to get dataset details
+def desDataset(dataset,info):
+    if info=="shape":
+        return dataset.shape
 
 #Function to describe the columns
 def desColumns(dataset,col):
