@@ -119,11 +119,19 @@ class AnalysisNumber(Frame):
         r=20
         
         #Taking data from the entries
-        if self.frm.get() and self.to.get() and self.rowStart.get() and self.rowEnd.get():
+        if self.frm.get() and self.to.get():
             frm=datetime.datetime.strptime(self.frm.get(), "%Y-%m-%d").date()
             to=datetime.datetime.strptime(self.to.get(), "%Y-%m-%d").date()
+        else:
+            frm=datetime.datetime.strptime("1910-01-01", "%Y-%m-%d").date()
+            to=datetime.datetime.strptime("1990-01-01", "%Y-%m-%d").date()
+            
+        if  self.rowStart.get() and self.rowEnd.get():
             rowStart=int(self.rowStart.get())
             rowEnd=int(self.rowEnd.get())
+        else:
+            rowStart=1
+            rowEnd=desDataset(self.dataset,"shape")[0]
         
         #filtering the dataset by dates
         newds=self.dataset
