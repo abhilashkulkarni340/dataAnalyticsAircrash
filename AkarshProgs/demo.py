@@ -23,6 +23,7 @@ class StartPage:
         #self.panel.pack(side = "bottom", fill = "both", expand = "yes")
         self.label1=Label(image = self.img)
         self.label1.pack(pady="30")
+        
         #Creating the buttons
         self.button1 = Button(self.frame, text = 'ANALYSIS BY NUMBERS',font="Georgia 10 bold", command = self.new_window1)
         self.button1.pack(pady="10")
@@ -42,7 +43,8 @@ class StartPage:
     def new_window2(self):  #Function to create an Analysis by graph window
         self.newWindow = Toplevel(self.master)
         self.newWindow.title("Analysis by Graph")
-        self.newWindow.geometry("622x100")
+        self.newWindow.geometry("1000x1000")
+        self.newWindow.configure(bg="lightblue")
         self.app=AnalysisGraph(self.newWindow)
     
     def closeWindow(self):  #Function to close the window
