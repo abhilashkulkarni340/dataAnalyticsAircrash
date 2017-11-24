@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 12 19:14:31 2017
-
-@author: abhilashsk
-"""
-
 from tkinter import *
 from first import *
 import datetime
@@ -17,124 +9,171 @@ class AnalysisNumber(Frame):
     def __init__(self, master): #Function to initialize the window
         #Initialize the frame
         super(AnalysisNumber,self).__init__(master)
+#        self.scrollbar=Scrollbar(master)
+#        self.scrollbar.pack(side=RIGHT, fill=Y)
         self.grid()
         self.display_widgets()
+        self.configure(bg="lightblue")
         self.dataset=readData()
-        #self.dataset=cleanData(self.dataset)
+        self.dataset=cleanData(self.dataset)
         
     def display_widgets(self):   #Function to create Widgets to take data
+        
+        
         """
         This section is for selecting columns to view the dataset
         """
         #Labels for setting the width of the columns
-        Label(self,text="ENTER DATA TO SELECT COLUMNS",width=25).grid(row=0,column=0,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=1,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=2,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=3,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=4,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=5,sticky=W)
+        Label(self,text="FILTER COLUMNS ",bg="lightblue",font="times 16 bold italic").grid(row=0,column=0,columnspan=2,sticky=W)
+        Label(self,text="   ",bg="lightblue",width=25).grid(row=0,column=1,sticky=W)
+        Label(self,text="   ",bg="lightblue",width=25).grid(row=0,column=2,sticky=W)
+        Label(self,text="   ",bg="lightblue",width=25).grid(row=0,column=3,sticky=W)
+        Label(self,text="   ",bg="lightblue",width=25).grid(row=0,column=4,sticky=W)
+        Label(self,text="   ",bg="lightblue",width=25).grid(row=0,column=5,sticky=W)
 #        self.close=Button(self,text="Quit",command=self.closeWindow)
 #        self.close.grid(row=0,column=6,sticky=W)
         
-        #Text boxes for take From and To date
-        Label(self,text="From (YYYY-MM-DD) :*").grid(row=1,column=0,sticky=W)
+        #Filter by From and To date
+        Label(self,text="From (YYYY-MM-DD) :",bg="lightblue").grid(row=1,column=0,sticky=W)
         self.frm=Entry(self)
         self.frm.grid(row=1,column=1,sticky=W)
         
-        Label(self,text="To (YYYY-MM-DD) :*").grid(row=2,column=0,sticky=W)
+        Label(self,bg="lightblue",text="To (YYYY-MM-DD) :").grid(row=1,column=2,sticky=W)
         self.to=Entry(self)
-        self.to.grid(row=2,column=1,sticky=W)
+        self.to.grid(row=1,column=3,sticky=W)
         
         #Checkboxes for selecting columns from the dataset
-        Label(self,text="Select Columns: *").grid(row=3,column=0,sticky=W)
+        Label(self,bg="lightblue",text="Select Columns: *").grid(row=3,column=0,sticky=W)
         self.operator=BooleanVar()
-        Checkbutton(self,text="OPERATOR",variable=self.operator).grid(row=3,column=1,sticky=W)
+        Checkbutton(self,bg="lightblue",text="OPERATOR",variable=self.operator).grid(row=3,column=1,sticky=W)
         self.route=BooleanVar()
-        Checkbutton(self,text="ROUTE",variable=self.route).grid(row=3,column=3,sticky=W)
+        Checkbutton(self,bg="lightblue",text="ROUTE",variable=self.route).grid(row=3,column=3,sticky=W)
         self.flight=BooleanVar()
-        Checkbutton(self,text="FLIGHT",variable=self.flight).grid(row=3,column=2,sticky=W)
+        Checkbutton(self,bg="lightblue",text="FLIGHT",variable=self.flight).grid(row=3,column=2,sticky=W)
         self.regis=BooleanVar()
-        Checkbutton(self,text="REGISTRATION",variable=self.regis).grid(row=4,column=1,sticky=W)
+        Checkbutton(self,bg="lightblue",text="REGISTRATION",variable=self.regis).grid(row=4,column=1,sticky=W)
         self.aboard=BooleanVar()
-        Checkbutton(self,text="ABOARD",variable=self.aboard).grid(row=4,column=2,sticky=W)
+        Checkbutton(self,bg="lightblue",text="ABOARD",variable=self.aboard).grid(row=4,column=2,sticky=W)
         self.fatal=BooleanVar()
-        Checkbutton(self,text="FATALITIES",variable=self.fatal).grid(row=4,column=3,sticky=W)
+        Checkbutton(self,bg="lightblue",text="FATALITIES",variable=self.fatal).grid(row=4,column=3,sticky=W)
         
-        #Text boxes to take Start and End indices of rows
-        Label(self,text="Start Index:*").grid(row=5,column=0,sticky=W)
+        #Filter by Start and End indices of rows
+        Label(self,bg="lightblue",text="Filter by Start Index:").grid(row=5,column=0,sticky=W)
         self.rowStart=Entry(self)
         self.rowStart.grid(row=5,column=1,sticky=W)
-        Label(self,text="End Index:*").grid(row=5,column=2,sticky=W)
+        Label(self,bg="lightblue",text="Filter by End Index:").grid(row=5,column=2,sticky=W)
         self.rowEnd=Entry(self)
         self.rowEnd.grid(row=5,column=3,sticky=W)
         
+        #Filter by Operator
+        Label(self,bg="lightblue",text="Filter by Operators (Eg. Military):").grid(row=6,column=0,sticky=W)
+        self.operator_entry=Entry(self)
+        self.operator_entry.grid(row=6,column=1,sticky=W)
+        
+        #Entry for displaying number of entries
+        Label(self,bg="lightblue",text="Number of Entries:").grid(row=20,column=0,sticky=W)
+        self.num_entries=Entry(self)
+        self.num_entries.grid(row=20,column=1,sticky=W)
+        
+        #can be removed
+        Label(self,bg="lightblue",text="     ").grid(row=47,column=0,columnspan=7,sticky=E)
+        
         #Button to submit the data
-        self.btn1=Button(self,text="SUBMIT COLUMNS",command=self.displayCols)
-        self.btn1.grid(row=6,column=2,columnspan=2,sticky=W)
+        self.btn1=Button(self,text="SUBMIT COLUMNS",font="Georgia 10 bold ",command=self.displayCols)
+        self.btn1.grid(row=48,column=3,sticky="nsew")
+        
         
         
         """
         This section is for displaying Descriptive Statistics
         """
+        
+        Label(self,bg="lightblue",text="*********").grid(row=49,column=3,sticky="nsew")
+        
         #Label for Descriptive Statistics section
-        Label(self,text="DESCRIPTIVE STATISTICS",width=25).grid(row=7,column=0,sticky=W)
+        Label(self,bg="lightblue",text="DESCRIPTIVE STATISTICS",font="times 16 bold italic").grid(row=50,column=0,columnspan=2,sticky=W)
         
         #Radiobutton for selecting columns
-        Label(self,text="Select Columns:* ").grid(row=8,column=0,sticky=W)
+        Label(self,bg="lightblue",text="Select Columns:* ").grid(row=51,column=0,sticky=W)
         self.col=StringVar()
-        Radiobutton(self,text="ABOARD",variable=self.col,value='Aboard').grid(row=8,column=1,sticky=W)
-        Radiobutton(self,text="FATALITIES",variable=self.col,value='Fatalities').grid(row=8,column=2,sticky=W)
-        Radiobutton(self,text="GROUND",variable=self.col,value='Ground').grid(row=8,column=3,sticky=W)
+        Radiobutton(self,bg="lightblue",text="ABOARD",variable=self.col,value='Aboard').grid(row=51,column=1,sticky=W)
+        Radiobutton(self,bg="lightblue",text="FATALITIES",variable=self.col,value='Fatalities').grid(row=51,column=2,sticky=W)
+        Radiobutton(self,bg="lightblue",text="GROUND",variable=self.col,value='Ground').grid(row=51,column=3,sticky=W)
         
         #Radiobutton to select particular statistic
-        Label(self,text="Select Result:* ").grid(row=9,column=0,sticky=W)
+        Label(self,bg="lightblue",text="Select Result:* ").grid(row=52,column=0,sticky=W)
         self.stat=StringVar()
-        Radiobutton(self,text="COUNT",variable=self.stat,value='count').grid(row=9,column=1,sticky=W)
-        Radiobutton(self,text="MEAN",variable=self.stat,value='mean').grid(row=9,column=2,sticky=W)
-        Radiobutton(self,text="STANDARD DEVIATION",variable=self.stat,value='std').grid(row=9,column=3,sticky=W)
-        Radiobutton(self,text="MINIMUM",variable=self.stat,value='min').grid(row=9,column=4,sticky=W)
-        Radiobutton(self,text="MAXIMUM",variable=self.stat,value='max').grid(row=9,column=5,sticky=W)
-        Radiobutton(self,text="ALL",variable=self.stat,value='all').grid(row=9,column=6,sticky=W)
+        Radiobutton(self,bg="lightblue",text="COUNT",variable=self.stat,value='count').grid(row=52,column=1,sticky=W)
+        Radiobutton(self,bg="lightblue",text="MEAN",variable=self.stat,value='mean').grid(row=52,column=2,sticky=W)
+        Radiobutton(self,bg="lightblue",text="STANDARD DEVIATION",variable=self.stat,value='std').grid(row=52,column=3,sticky=W)
+        Radiobutton(self,bg="lightblue",text="MINIMUM",variable=self.stat,value='min').grid(row=52,column=4,sticky=W)
+        Radiobutton(self,bg="lightblue",text="MAXIMUM",variable=self.stat,value='max').grid(row=52,column=5,sticky=W)
+        Radiobutton(self,bg="lightblue",text="ALL",variable=self.stat,value='all').grid(row=53,column=1,sticky=W)
         
         
         #Entries for displaying stats
-        Label(self,text="COUNT",width=25).grid(row=10,column=0,sticky=W)
+        Label(self,bg="lightblue",text="COUNT").grid(row=54,column=1,sticky=W)
         self.count=Entry(self)
-        self.count.grid(row=11,column=0,sticky=W)
-        Label(self,text="MEAN",width=25).grid(row=10,column=1,sticky=W)
+        self.count.grid(row=55,column=1,sticky=W)
+        Label(self,bg="lightblue",text="MEAN").grid(row=54,column=2,sticky=W)
         self.mean=Entry(self)
-        self.mean.grid(row=11,column=1,sticky=W)
-        Label(self,text="STANDARD DEVIATION",width=25).grid(row=10,column=2,sticky=W)
+        self.mean.grid(row=55,column=2,sticky=W)
+        Label(self,bg="lightblue",text="STANDARD DEVIATION").grid(row=54,column=3,sticky=W)
         self.std=Entry(self)
-        self.std.grid(row=11,column=2,sticky=W)
-        Label(self,text="MINIMUM",width=25).grid(row=10,column=3,sticky=W)
+        self.std.grid(row=55,column=3,sticky=W)
+        Label(self,bg="lightblue",text="MINIMUM").grid(row=54,column=4,sticky=W)
         self.min=Entry(self)
-        self.min.grid(row=11,column=3,sticky=W)
-        Label(self,text="MAXIMUM",width=25).grid(row=10,column=4,sticky=W)
+        self.min.grid(row=55,column=4,sticky=W)
+        Label(self,bg="lightblue",text="MAXIMUM").grid(row=54,column=5,sticky=W)
         self.max=Entry(self)
-        self.max.grid(row=11,column=4,sticky=W)
+        self.max.grid(row=55,column=5,sticky=W)
 
+        #can be removed
+        Label(self,bg="lightblue",text="     ").grid(row=56,column=0,columnspan=7,sticky=E)
+        
         #Button to submit data
-        self.btn2=Button(self,text="SUBMIT STATISTICS",command=self.descStat)
-        self.btn2.grid(row=12,column=1,columnspan=2,sticky=W)
+        Label(self,bg="lightblue",text=" ").grid(row=57,column=0,sticky=W)
+        self.btn2=Button(self,text="SUBMIT STATISTICS",font="Georgia 10 bold ",command=self.descStat)
+        self.btn2.grid(row=57,column=3,sticky="nsew")
         
-    def displayCols(self):  #Function to display the columns
+        
+    def displayCols(self):  #Function to display the colum
         #initialize variables
+        newds=self.dataset
         msg={}
-        col=0
-        r=20
+        #col=0
+        #r=70
         
-        #Taking data from the entries
-        if self.frm.get() and self.to.get() and self.rowStart.get() and self.rowEnd.get():
+        #Taking from and to data the entries
+        if self.frm.get() and self.to.get():
             frm=datetime.datetime.strptime(self.frm.get(), "%Y-%m-%d").date()
             to=datetime.datetime.strptime(self.to.get(), "%Y-%m-%d").date()
-            rowStart=int(self.rowStart.get())
-            rowEnd=int(self.rowEnd.get())
+        else:
+            frm=datetime.datetime.strptime("1910-01-01", "%Y-%m-%d").date()
+            to=datetime.datetime.strptime("1990-01-01", "%Y-%m-%d").date()
+            
         
         #filtering the dataset by dates
-        newds=self.dataset
-        newds=filterDs(newds,frm,to)
+        newds=filterByDates(newds,frm,to)
         
+        #filtering the dataset by operator
+        if self.operator_entry.get():
+            newds=filterByOperator(newds,self.operator_entry.get())
+        
+        #get newds shape
+        newds_shape=desDataset(newds,"shape")[0]
+        self.num_entries.config(state=NORMAL)
+        self.num_entries.delete(0,END)
+        self.num_entries.insert(0,str(newds_shape))
+        self.num_entries.config(state=DISABLED)
+        
+        #Taking start and end index
+        if  self.rowStart.get() and self.rowEnd.get():
+            rowStart=int(self.rowStart.get())
+            rowEnd=int(self.rowEnd.get())
+        else:
+            rowStart=0
+            rowEnd=desDataset(newds,"shape")[0]
         
         #Checking for selected checkboxes
         if self.operator.get():
@@ -151,15 +190,19 @@ class AnalysisNumber(Frame):
             msg['FATALITIES']=getColumns(newds,'Fatalities',rowStart,rowEnd)
         
         #Displaying the columns in textareas
+        print(msg.keys())
         for x in msg.keys():
-            Label(self,text=x).grid(row=r,column=col,sticky=W)
-            self.t=Text(self,width=25,height=rowEnd-rowStart,wrap=WORD)
-            self.t.grid(row=r+2,column=col,rowspan=2,sticky=W)
-            self.t.config(state=NORMAL)
-            self.t.delete(0.0,END)
-            self.t.insert(0.0,msg[x])
-            self.t.config(state=DISABLED)
-            col+=1
+            showColumn(msg[x],x)    #calls showColumn function to display the result in a separate window
+            
+#            Label(self,bg="lightblue",text=x).grid(row=r,column=col,sticky=W)
+#            self.t=Text(self,bg="lightblue",width=25,height=rowEnd-rowStart,wrap=WORD)
+#            self.t.grid(row=r+2,column=col,rowspan=2,sticky=W)
+#            self.t.config(state=NORMAL)
+#            self.t.delete(0.0,END)
+#            self.t.insert(0.0,msg[x])
+#            self.t.config(state=DISABLED)
+#            col+=1
+            
         
     def descStat(self): #Function to get descriptive statistics of a particular column
         #initializing dictionary to store the entry objects
@@ -189,9 +232,33 @@ class AnalysisNumber(Frame):
     def closeWindow(self):  #Function to close the window
         self.master.quit()
         self.master.destroy()
+        
+
+#Function to display the result of the filter in a separate window
+def showColumn(msg,x):
+    #initializing the window
+    master = Tk()
+    master.geometry("500x500")
+    master.title(x)
+    master.configure(bg="lightblue")
+    
+    #creating the scroll bar
+    scrollbar = Scrollbar(master)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    
+    #adding the text in text area
+    txt = Text(master, yscrollcommand=scrollbar.set,width=500)
+    txt.insert(0.0, msg)
+    txt.config(state=DISABLED)
+    txt.pack(side=RIGHT, fill=BOTH)
+    
+    #Adding the scrollbar
+    scrollbar.config(command=txt.yview)
+    
 
 #root=Tk()
 #root.title("Data analysis of Aircrash Dataset")
-#root.geometry("2000x2000")
-#app=Application(root)
+#root.geometry("2000x1000")
+#root.configure(bg="lightblue")
+#app=AnalysisNumber(root)
 #root.mainloop()
