@@ -17,26 +17,28 @@ class AnalysisGraph(Frame):
         self.grid()
         self.display_widgets()
         self.dataset=readData()
-        #self.dataset=cleanData(self.dataset)
+        self.dataset=cleanData(self.dataset)
+        self.configure(bg="lightblue")
         
     def display_widgets(self):  #Function to create the widgets to take data
         
-        Label(self,text="ENTER DATA TO SELECT COLUMNS",width=25).grid(row=0,column=0,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=1,sticky=W)
-        Label(self,text="   ",width=25).grid(row=0,column=2,sticky=W)
+        Label(self,text="ENTER DATA TO SELECT COLUMNS",bg="lightblue",font="times 16 bold italic").grid(row=0,column=0,columnspan=2,sticky=W)
+
+        Label(self,bg="lightblue",text="   ",width=25).grid(row=0,column=2,sticky=W)
 #        self.close=Button(self,text="Quit",command=self.closeWindow)
 #        self.close.grid(row=0,column=3,sticky=W)
         
         #Radiobutton for selecting columns
-        Label(self,text="Select Columns:* ").grid(row=1,column=0,sticky=W)
+        Label(self,bg="lightblue",text="Select Columns:* ").grid(row=1,column=0,sticky=W)
         self.col=StringVar()
-        Radiobutton(self,text="ABOARD",variable=self.col,value='Aboard').grid(row=1,column=1,sticky=W)
-        Radiobutton(self,text="FATALITIES",variable=self.col,value='Fatalities').grid(row=1,column=2,sticky=W)
-        Radiobutton(self,text="GROUND",variable=self.col,value='Ground').grid(row=1,column=3,sticky=W)
+        Radiobutton(self,bg="lightblue",text="ABOARD",variable=self.col,value='Aboard').grid(row=1,column=1,sticky=W)
+        Radiobutton(self,bg="lightblue",text="FATALITIES",variable=self.col,value='Fatalities').grid(row=1,column=2,sticky=W)
+        Radiobutton(self,bg="lightblue",text="GROUND",variable=self.col,value='Ground').grid(row=1,column=3,sticky=W)
         
         #Button to submit the data
-        self.btn1=Button(self,text="SUBMIT COLUMNS",command=self.displayGraph)
-        self.btn1.grid(row=2,column=2,columnspan=2,sticky=W)
+        Label(self,bg="lightblue",text=" ").grid(row=2,column=0,sticky=W)
+        self.btn1=Button(self,font="Georgia 10 bold ",text="SUBMIT COLUMNS",command=self.displayGraph)
+        self.btn1.grid(row=3,column=1,columnspan=2,sticky=N)
         
     def displayGraph(self): #Function to display the graph
         if self.col.get():
