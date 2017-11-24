@@ -19,6 +19,7 @@ class AnalysisGraph(Frame):
         self.dataset=readData()
         self.dataset=cleanData(self.dataset)
         self.configure(bg="lightblue")
+        
     def display_widgets(self):  #Function to create the widgets to take data
         
         Label(self,text="ENTER DATA TO SELECT COLUMNS",bg="lightblue",font="times 16 bold italic").grid(row=0,column=0,columnspan=2,sticky=W)
