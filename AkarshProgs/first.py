@@ -39,16 +39,14 @@ def cleanData(dataset):
         print("There are no invalid values in the dataset.\n")
         
     #changing the format and type of values in Date column
-    shape=dataset.shape
-    for x in range(shape[0]):
-        dataset.iloc[x,0]=datetime.datetime.strptime(dataset.iloc[x,0], "%m/%d/%Y").date()
+    dataset['Date']=pd.to_datetime(dataset['Date'],format="%m/%d/%Y")
     
     print("Dataset has been cleaned.")
     #returning dataset
     return dataset
 
 """
-Selecting Columns Section
+Data Transformation Section
 """
 
 #Function to return columns of the dataset
@@ -58,7 +56,7 @@ def getColumns(dataset,col,rowStart,rowEnd):
 #Function to return dataset filtered by dates
 def filterDs(dataset,frm,to):
     filter_1=dataset['Date']>frm
-    filter_2=dataset['Date']>to
+    filter_2=dataset['Date']<to
     return dataset[filter_1 & filter_2]
 
 """
