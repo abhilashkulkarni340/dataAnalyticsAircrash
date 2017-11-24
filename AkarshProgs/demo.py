@@ -34,6 +34,7 @@ class StartPage:
         self.frame.pack()
 
     def new_window1(self):  #Function to create an Analysis by numbers window
+        print("\nOpening Analysis by numbers frame...")
         self.newWindow = Toplevel(self.master)
         self.newWindow.title("Analysis by Numbers")
         self.newWindow.geometry("2000x1000")
@@ -41,6 +42,7 @@ class StartPage:
         self.app = AnalysisNumber(self.newWindow)
         
     def new_window2(self):  #Function to create an Analysis by graph window
+        print("\nOpening Analysis by graph frame...")
         self.newWindow = Toplevel(self.master)
         self.newWindow.title("Analysis by Graph")
         self.newWindow.geometry("1000x1000")
@@ -53,6 +55,7 @@ class StartPage:
 
 
 def main(): #Main Function
+    print("\nOpening master window frame...")
     root = Tk()
     root.geometry("300x300")
     root.title("Data Analysis of Aircrash Dataset")
